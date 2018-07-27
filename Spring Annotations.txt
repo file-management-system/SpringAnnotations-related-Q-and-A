@@ -1,0 +1,81 @@
+1)What are the annotations we used in the StudentJdbcRepository class?.
+
+Ans:We used @Repository,@Autowired,@Override annotations in the StudentJdbcRepository class.
+
+2)Why we used those annotations?
+Ans:- I)@Repository--
+--------------------------
+i)We used @Repository annotation because The @Repository annotation is a specialization of the @Component annotation with similar use and functionality. 
+ii)It provides  additional benefits specifically for DAOs(Data Access Objects) .
+iii) It also makes the unchecked exceptions (thrown from DAO methods) eligible for translation into Spring DataAccessException.
+
+II)@Autowired--
+-----------------------
+i) @Autowired annotation is used for automatic dependency injection.
+ii)@Autowired annotation can be applied on variables and methods for autowiring byType.
+iii)We can also use @Autowired annotation on constructor for constructor based spring autowiring.
+
+III)@Override--
+------------------------
+i)@Override annotation is used when we override a method in sub class.
+ii) If programmer makes any mistake such as wrong method name, wrong parameter types while overriding, he would get a compile time error. 
+iii)It improves the readability of the code.
+
+3)In which package of spring those annotations are available?
+Ans:-
+In our example the annotations are present in package - com.in28minutes.springboot.jdbc.h2.example.student;
+
+4)What is jdbc template in spring?
+Ans:-
+
+i)JdbcTemplate  is the base class that manages the processing of all events and database connections.
+ii)The JdbcTemplate class executes SQL queries, iterates over the ResultSet, and retrieves the called values, updates the instructions and procedure calls, “catches” the exceptions, and translates them into the exceptions defined in the org.springframwork.dao package.
+
+5)What is row mapper in spring jdbc?
+Ans:- row mapper is an Interface in spring jdbc.
+ii)RowMapper interface is used by JdbcTemplate for mapping rows of a ResultSet on a per-row basis.
+
+6)Why we use row mapper in spring jdbc?
+
+Ans:- i)we  use RowMapper interface to fetch the records from the database using query() method of JdbcTemplate class.
+ii)RowMapper interface allows to map a row of the relations with the instance of user-defined class. 
+iii)It iterates the ResultSet internally and adds it into the collection. So we don't need to write a lot of code to fetch the records.
+ 
+7)Write the code using jdbc template for insert , update, delete all, delete by Id, select all, select by id?
+Ans:-
+i)The code using jdbc template for insert in our code is :
+
+ jdbcTemplate.update("insert into student (id, name, passport_number) " + "values(?,  ?, ?)",
+ new Object[] { student.getId(), student.getName(), student.getPassportNumber() }
+ 
+ii)The code using jdbc template for update in our code is :
+
+ jdbcTemplate.update("update student " + " set name = ?, passport_number = ? " + " where id = ?",
+ new Object[] { student.getName(), student.getPassportNumber(), student.getId() }
+ 
+ iii)The code using jdbc template for delete by Id in our code is :
+ 
+		 jdbcTemplate.update("delete from student where id=?", new Object[] { id });
+		 
+iv)	The code using jdbc template for select by Id in our code is :
+
+    jdbcTemplate.queryForObject("select * from student where id=?", new Object[] { id } 
+	
+v)	The code using jdbc template for select all in our code is :
+
+   jdbcTemplate.query("select * from student", new StudentRowMapper())
+   
+vi)The code using jdbc template for delete all in our code is :
+
+  jdbcTemplate.query("delete  *from student")
+
+  
+
+	
+	 
+
+    
+
+
+
+
